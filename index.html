@@ -8,29 +8,92 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Domine:wght@400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <h1 class="title">My Virtual Bookcase</h1>
-  <div class="container">
-    <div class="bookcase-container">
+  <div class="layout">
 
-      <div class="book">
-        <div class="book__data">
-          <h3 class="book__title">The legend Lorem ipsum dolor  </h3>
-          <h4 class="book__author"><span class="book__by">by</span> <br> Junior mesias </h4>
+    <div class="sidebar">
+
+      <div class="sidebar__logo-container">
+        <i class="fa-solid fa-book-open sidebar__icon sidebar__logo"></i>
+        <div class="sidebar__title">Menu</div>
+        <i class='fa-solid fa-bars menu__icon sidebar__icon' ></i>
+      </div>
+      
+      <nav>
+        <ul class="nav__menu">
+          <li class="nav__item">
+            <a href="#" class="nav__link">
+              <i class='fa-solid fa-plus sidebar__icon nav__icon'></i>
+              <span class="links_name nav__link-text">Add new book</span>
+            </a>
+            <span class="nav__tooltip">Add new book</span>
+          </li>
+          <li class="nav__item">
+            <a href="#" class="nav__link">
+              <i class='fa-regular fa-user sidebar__icon nav__icon' ></i>
+              <span class="links_name nav__link-text" >User</span>
+            </a>
+          <span class="nav__tooltip">User</span>
+        </li>
+        </ul>
+    </nav>
+
+    </div>
+
+    <main class="home-section main-container">
+      <h1 class="title">My Virtual Bookcase</h1>
+      <div class="bookcase-container">
+
+        <div class="book">
+          <div class="book__data">
+            <h3 class="book__title">The legend Lorem ipsum   </h3>
+            <h4 class="book__author"><span class="book__by">by</span> <br> Junior mesias </h4>
+          </div>
+        </div>
+        <div class="book">
+          
+        </div>
+        <div class="book">
+          
         </div>
       </div>
-      <div class="book">
-        
-      </div>
-      <div class="book">
-        
-      </div>
-    </div>
-  </div>  
+    </main>
+  </div>
+
+
+
   <script src="script.js"></script>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<div class="bookcase-container">
+
+  <div class="book">
+    <div class="book__data">
+      <h3 class="book__title">The legend Lorem ipsum   </h3>
+      <h4 class="book__author"><span class="book__by">by</span> <br> Junior mesias </h4>
+    </div>
+  </div>
+  <div class="book">
+    
+  </div>
+  <div class="book">
+    
+  </div>
+</div> -->

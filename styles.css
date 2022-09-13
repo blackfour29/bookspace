@@ -3,16 +3,21 @@
   padding: 0;
 }
 
-body{
-  background-color: rgb(239, 237, 222);
-}
-
 :root{
   font-size: 62.5%;
   --serif-font: 'Domine', serif;
   --book-serif-font: 'Merriweather', serif;
+}
 
+body{
+  background-color: rgb(239, 237, 222);
+  min-height: 100vh;
+}
 
+.layout{
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
 }
 
 .title{
@@ -25,16 +30,201 @@ body{
   font-weight: 600;
 }
 
-.container{
-  width: 80%;
-  max-width: 1300px;
-  margin: 0 auto;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins" , sans-serif;
 }
+
+
+/* Sidebar */
+
+.sidebar{
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 78px;
+  background: #11101D;
+  padding: 0.6rem 1.4rem;
+  z-index: 99;
+  transition: all 0.5s ease;
+}
+
+.sidebar--open{
+  width: 250px;
+}
+
+.sidebar__logo-container{
+  height: 50px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.sidebar__logo{
+  opacity: 0;
+  font-size: 1.8rem;
+  transition: all 0.5s ease;
+}
+
+.sidebar__title{
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.menu__icon{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  transition: all 0.4s ease;
+  font-size: 2.3rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.sidebar__icon{
+  color: #fff;
+  height: 60px;
+  min-width: 50px;
+  text-align: center;
+  line-height: 60px;
+}
+
+/* menu in the sidebar*/
+
+.nav__menu{
+  margin-top: 20px;
+  height: 100%;
+}
+
+.nav__item{
+  position: relative;
+  margin: 0.8rem 0;
+  list-style: none;
+}
+
+.nav__tooltip{
+  position: absolute;
+  top: -2rem;
+  left: calc(100% + 15px); /* basically right 0 and then 15 more px*/
+  z-index: 3;
+  background-color: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.4rem;
+  font-size: 1.5rem;
+  font-weight: 400;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  /* transition: 0s; */
+}
+
+.nav__item:hover .nav__tooltip{
+  opacity: 1;
+  /* pointer-events: auto; */
+  transition: all 0.4s ease;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.nav__link{
+  display: flex;
+  /* height: 100%; */
+  width: 100%;
+  border-radius: 12px;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  background: #11101D;
+}
+
+.nav__link:hover{
+  background: #FFF;
+}
+
+.nav__link:hover .nav__icon{
+   /* transition: all 0.5s ease;  */
+  color: #11101D;
+}
+
+.nav__link-text{
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+.nav__link:hover .nav__link-text{
+  color: #11101d;
+}
+
+.nav__icon{
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 12px;
+}
+
+/* main content */
+
+.main-container{
+  /* position: relative; */
+  /* background: #E4E9F7; */
+  /* min-height: 100vh;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease; */
+  /* z-index: 2; */
+}
+
+.main-container{
+  width: calc(100% - 78px);
+  margin-left: 78px;
+  transition: all 0.5s ease;
+}
+
+.main-container-reduced{
+  width: calc(100% - 250px);
+  margin-left: 250px;
+}
+
+/* .sidebar--open ~ .home-section{
+  left: 250px;
+  width: calc(100% - 250px);
+} */
+
+
+
+
+
+
+@media (max-width: 420px) {
+  .sidebar li .nav__tooltip{
+    display: none;
+  }
+}
+
+
+
+/* Bookcase */
 
 .bookcase-container{
   display: flex;
   flex-wrap: wrap;
   gap: 3rem;
+  box-sizing: border-box;
+  padding: 2rem;
 }
 
 /* Book design */
@@ -55,7 +245,7 @@ body{
   position: relative;
   box-sizing: border-box;
   padding: 1.5rem 0.5rem;
-  margin: 1rem;
+  /* margin: 1rem; */
   display: flex;
   justify-content: flex-end;
   
@@ -88,7 +278,7 @@ body{
   overflow-x: hidden;
   box-sizing: border-box;
   padding-right: 0.5rem;
-  color: rgb(245, 245, 245);
+  color: rgb(255, 255, 255);
   font-family: var(--book-serif-font);
 }
 
@@ -153,3 +343,10 @@ body{
 }
 
 
+.invisible{
+  opacity: 0;
+}
+
+.hidden{
+  display: none;
+}
