@@ -14,6 +14,47 @@
 </head>
 
 <body>
+
+  <div class="overlay hidden"></div>
+
+  <div class="modal hidden">
+    <i class="fa-solid fa-xmark modal__close-button"></i>
+    <form action="" method="post" class="add-new-book-form">
+
+      <p class="form__title">Book data:</p>
+
+  
+        <div class="form--inputs">
+          
+          <div class="title-input-container">
+            <label for="new-book__title" class="new-book__label">Book title (*)</label>
+            <input type="text" required id="new-book__title" name="book title" class="new-book__title-input">
+            <i class="fa-solid fa-circle-check new-book-check new-book__title-check new-book__title-check-success hidden"></i>
+            <i class="fa-solid fa-circle-xmark new-book-check new-book__title-check new-book__title-check-error hidden"></i>
+            <p class="new-book__title-error invisible">Title can't be empty!</p>
+          </div>
+
+          <div class="author-input-container">
+            <label for="new-book__author" class="new-book__label">Book author</label>
+            <input type="text" id="new-book__author" name="book author" class="new-book__author-input">
+            <!-- <i class="fa-solid fa-circle-check new-book-check new-book__author-check new-book__author-check-success "></i>
+            <i class="fa-solid fa-circle-xmark new-book-check new-book__author-check new-book__author-check-error hidden"></i> -->
+          </div>  
+
+          <div class="comments-input-container">
+            <label for="new-book__comments" class="new-book__label">Comments</label>
+
+              <textarea class="new-book__comments" placeholder="Pages? Read status? Price?" name="book comments"></textarea>
+          </div>
+        </div>
+      
+      <p class="form__required-fields">* Required fields</p>
+
+      <button class="new-book__add-book-btn">Add book</button>
+
+    </form>
+  </div>
+
   <div class="layout">
 
     <div class="sidebar">
@@ -27,7 +68,7 @@
       <nav>
         <ul class="nav__menu">
           <li class="nav__item">
-            <a href="#" class="nav__link">
+            <a href="#" class="nav__link nav__add-book-link">
               <i class='fa-solid fa-plus sidebar__icon nav__icon'></i>
               <span class="links_name nav__link-text">Add new book</span>
             </a>
@@ -43,11 +84,27 @@
         </ul>
     </nav>
 
+    <hr class="horizontal-rule invisible">
+
+    <div class="book-list-container">
+      <div class="book-list">
+        <div class="book-item invisible">
+          <h2 class="book-item__title">The legend of dullahan </h2>
+          <p class="book-item__author"> by John Doe</p>
+          <div class="book-item__buttons">
+            <i class="fa-solid fa-pen book-item__icon book-item__edit-icon"></i>
+            <i class="fa-solid fa-xmark book-item__icon "></i>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
     </div>
 
     <main class="home-section main-container">
       <h1 class="title">My Virtual Bookcase</h1>
-      <div class="bookcase-container">
+      <div class="bookshelf-container">
 
         <div class="book">
           <div class="book__data">
@@ -64,8 +121,6 @@
       </div>
     </main>
   </div>
-
-
 
   <script src="script.js"></script>
 </body>
