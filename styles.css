@@ -186,7 +186,7 @@ body{
   width: 100%;
 }
 
-.book-item{
+.book-card{
   min-width: 50px;
   position: relative;
   word-wrap: break-word;
@@ -200,14 +200,14 @@ body{
   /* the item should vanish instantly and appear only after the sidebar is fully extended */
 }
 
-.book-item__buttons{
+.book-card__buttons{
   display: flex;
   justify-content: center;
   gap: 3rem;
   margin: 1.5rem 0 0.5rem 0;
 }
 
-.book-item__icon{
+.book-card__icon{
   font-size: 1.8rem;
   width: 30px; 
   height: 30px;
@@ -220,21 +220,23 @@ body{
   border-radius: 0.5rem;
 }
 
-.book-item__icon:hover{
+.book-card__icon:hover{
   background-color: #fff;
   color: #000;
 }
 
-.book-item__edit-icon{
+.book-card__edit-icon{
   font-size: 1.6rem;
 }
 
-.book-item__author{
+.book-card__author{
   font-size: 1.2rem;
   text-align: end;
 }
 
-
+.book-card__comments{
+  margin-top: 1.5rem;
+}
 
 
 /* main content */
@@ -262,23 +264,11 @@ body{
 }
 
 
-
-
-
-
-
-@media (max-width: 420px) {
-  .sidebar li .nav__tooltip{
-    display: none;
-  }
-}
-
-
-
-/* Bookcase */
+/* Bookshelf */
 
 .bookshelf-container{
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 3rem;
   box-sizing: border-box;
@@ -366,8 +356,8 @@ body{
 }
 
 .book__by{
-  /* margin-left: 35%; */
   font-size: 1.6rem;
+  line-height: 2.5;
 }
 
 .book__author{
@@ -556,4 +546,15 @@ color:rgb(113, 224, 76);
 
 .hidden{
   display: none;
+}
+
+
+
+
+
+
+@media (max-width: 420px) {
+  .sidebar li .nav__tooltip{
+    display: none;
+  }
 }
