@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Virtual Bookcase</title>
+  <title>My Virtual Bookshelf</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Domine:wght@400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700&display=swap" rel="stylesheet">
@@ -14,11 +14,14 @@
 </head>
 
 <body>
+  <div class="alert">
+    <p></p>
+  </div>
 
   <div class="overlay hidden"></div>
 
-  <div class="modal hidden">
-    <i class="fa-solid fa-xmark modal__close-button"></i>
+  <div class="new-book__modal hidden">
+    <i class="fa-solid fa-xmark new-book-modal__close-button"></i>
     <form action="" method="post" class="add-new-book-form">
 
       <p class="form__title">Book data:</p>
@@ -31,14 +34,11 @@
             <input type="text" required id="new-book__title" name="book title" class="new-book__title-input">
             <i class="fa-solid fa-circle-check new-book-check new-book__title-check new-book__title-check-success hidden"></i>
             <i class="fa-solid fa-circle-xmark new-book-check new-book__title-check new-book__title-check-error hidden"></i>
-            <p class="new-book__title-error invisible">Title can't be empty!</p>
           </div>
 
           <div class="author-input-container">
             <label for="new-book__author" class="new-book__label">Book author</label>
             <input type="text" id="new-book__author" name="book author" class="new-book__author-input">
-            <!-- <i class="fa-solid fa-circle-check new-book-check new-book__author-check new-book__author-check-success "></i>
-            <i class="fa-solid fa-circle-xmark new-book-check new-book__author-check new-book__author-check-error hidden"></i> -->
           </div>  
 
           <div class="comments-input-container">
@@ -48,10 +48,40 @@
           </div>
         </div>
       
+      <p class="form__required-fields">* Required field</p>
+
+      <button class="new-book__add-book-btn ">Add book</button>
+
+    </form>
+  </div>
+
+  <div class="update-book__modal hidden">
+    <i class="fa-solid fa-xmark update-book-modal__close-button"></i>
+    <form action="" method="post" class="update-book-form">
+
+      <p class="form__title">Book data:</p>
+
+        <div class="form--inputs">
+          
+          <div class="title-input-container">
+            <label for="update-book__title" class="update-book__label">Book title (*)</label>
+            <input type="text" required id="update-book__title" name="book title" class="update-book__title-input">
+          </div>
+
+          <div class="author-input-container">
+            <label for="update-book__author" class="update-book__label">Book author</label>
+            <input type="text" id="update-book__author" name="book author" class="update-book__author-input">
+          </div>  
+
+          <div class="comments-input-container">
+            <label for="update-book__comments" class="update-book__label">Comments</label>
+              <textarea class="update-book__comments" placeholder="Pages? Read status? Price?" name="book comments"></textarea>
+          </div>
+        </div>
+      
       <p class="form__required-fields">* Required fields</p>
-
-      <button class="new-book__add-book-btn">Add book</button>
-
+      
+      <button class="update-book__update-book-btn ">Update book</button>
     </form>
   </div>
 
@@ -89,7 +119,7 @@
     <div class="book-card-container">
       <div class="book-card-list">
         <div class="book-card invisible">
-          <h2 class="book-card__title">The legend of dullahan </h2>
+          <p class="book-card__title">The legend of dullahan </p>
           <p class="book-card__author"> by John Doe</p>
           <div class="book-card__buttons">
             <i class="fa-solid fa-pen book-card__icon book-card__edit-icon"></i>
@@ -103,7 +133,7 @@
     </div>
 
     <main class="home-section main-container">
-      <h1 class="title">My Virtual Bookcase</h1>
+      <h1 class="title">My Virtual Bookshelf</h1>
       <div class="bookshelf-container">
 
         <div class="book">
@@ -122,6 +152,7 @@
     </main>
   </div>
 
+  <script src="ui.js"></script>
   <script src="script.js"></script>
 </body>
 

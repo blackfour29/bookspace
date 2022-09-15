@@ -124,12 +124,10 @@ body{
   opacity: 0;
   white-space: nowrap;
   pointer-events: none;
-  /* transition: 0s; */
 }
 
 .nav__item:hover .nav__tooltip{
   opacity: 1;
-  /* pointer-events: auto; */
   transition: all 0.4s ease;
   top: 50%;
   transform: translateY(-50%);
@@ -186,6 +184,12 @@ body{
   width: 100%;
 }
 
+.book-card-list{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 .book-card{
   min-width: 50px;
   position: relative;
@@ -198,6 +202,11 @@ body{
   transition: width 0.1s ease;
   transition: opacity 0.5s ease 0.3s;
   /* the item should vanish instantly and appear only after the sidebar is fully extended */
+}
+
+.book-card__title{
+  font-size: 1.6rem;
+  font-weight: 600;
 }
 
 .book-card__buttons{
@@ -236,21 +245,11 @@ body{
 
 .book-card__comments{
   margin-top: 1.5rem;
+  font-size: 1.2rem;
 }
 
 
 /* main content */
-
-/* .main-container{
-  position: relative; 
-  background: #E4E9F7;
-  min-height: 100vh;
-  top: 0;
-  left: 78px;
-  width: calc(100% - 78px);
-  transition: all 0.5s ease;
-  z-index: 2;
-} */
 
 .main-container{
   width: calc(100% - 78px);
@@ -305,7 +304,7 @@ body{
   left: 3px;
   bottom: 0;
   height: 45px;
-  width: 98.9%;
+  width: calc(100% - 3px);
   bottom: 5px;
   background: white;
   border-radius: 32px 4px 4px 32px;
@@ -403,7 +402,8 @@ body{
 
 /* MODAL */
 
-.modal{
+.new-book__modal,
+.update-book__modal{
   width: 340px;
   max-height: 500px;
   background-color: #fff;
@@ -417,7 +417,8 @@ body{
   box-shadow: inset 0px 0px 22px -9px rgba(0,0,0,0.59);
 }
 
-.modal__close-button{
+.new-book-modal__close-button,
+.update-book-modal__close-button{
   width: 50px;
   height: 50px;
   font-size: 2rem;
@@ -432,7 +433,8 @@ body{
 
 /* ADD BOOK FORM */
 
-.add-new-book-form{
+.add-new-book-form,
+.update-book-form{
   box-sizing: border-box;
   padding: 2rem;
   display: flex;
@@ -447,9 +449,10 @@ body{
   color: rgb(22, 145, 221);
 }
 
-.new-book__label{
+.new-book__label,
+.update-book__label{
   margin-bottom: 0.5rem;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 }
 
 input{
@@ -476,35 +479,8 @@ input:focus{
   position: relative;
 }
 
-.new-book__title-error{
-  font-size: 1.2rem;
-  margin: 0.8rem 0 1rem 0;
-  color: rgb(255, 54, 54);
-  position: absolute;
-  top: 40px;
-  left: 0;
-}
-
-.new-book-check{
-  font-size: 1.8rem;
-}
-
-.new-book__title-check{
-  position: absolute;
-  top: 25px;
-  right: 5px;
-}
-
-.new-book__title-check-success{
-color:rgb(113, 224, 76);
-}  
-
-.new-book__title-check-error{
-  color:rgb(224, 26, 26);
-}
-
-
-.new-book__comments{
+.new-book__comments,
+.update-book__comments{
   /* width: 280px; */
   box-sizing: border-box;
   padding: 0.5rem;
@@ -521,10 +497,10 @@ color:rgb(113, 224, 76);
   margin-bottom: 1rem;
 }
 
-.new-book__add-book-btn{
+.new-book__add-book-btn,
+.update-book__update-book-btn{
   font-size: 2rem;
   padding: 0.5rem 0;
-  background-color: rgb(22, 145, 221);
   border: none;
   color: #fff;
   border-radius: 0.4rem;
@@ -536,9 +512,54 @@ color:rgb(113, 224, 76);
   cursor: pointer;
 }
 
+.new-book__add-book-btn{
+  background-color: rgb(22, 145, 221);
+}
+
+.update-book__update-book-btn{
+  background-color: rgb(176, 176, 54);
+}
+
 .new-book__add-book-btn:hover{
   opacity: 0.8;
 }
+
+.alert{
+  position: fixed;
+  top: 30px;
+  right: -250px; /*should be 50px*/
+  width: 250px;
+  height: 60px;
+  box-sizing: border-box;
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 10px;
+  opacity: 0;
+  transition: all 0.5s ease;
+  z-index: 200;
+}
+
+.alert__success{
+  background-color:rgb(49, 165, 17);
+  color: #fff;
+  font-size: 1.6rem;
+}
+
+.alert__update{
+  background-color: rgb(176, 176, 54);
+  color: #fff;
+  font-size: 1.6rem;
+}
+
+
+
+
+
+
+
+
 
 .invisible{
   opacity: 0;
