@@ -75,7 +75,6 @@ function toggleBookCardVisibility(){
   }
 } 
 
-
 function showAlert(type, message){
   if(type === 'success'){
     alertEl.style.right='50px';
@@ -84,6 +83,12 @@ function showAlert(type, message){
     alertEl.classList.add(`alert__${type}`)
   }
   else if(type === 'update'){
+    alertEl.style.right = '50px'
+    alertEl.style.opacity = 1;
+    alertEl.classList.add(`alert__${type}`)
+    alertEl.textContent = `${message}`;
+  }
+  else if(type ==='error'){
     alertEl.style.right = '50px'
     alertEl.style.opacity = 1;
     alertEl.classList.add(`alert__${type}`)
@@ -106,12 +111,18 @@ function clearFormFields(){
   formCommentsInput.value ='';
 }
 
-function showElement(elementToBeDisplayed){
-  elementToBeDisplayed.classList.remove('hidden');
+function showElement(...elementsToDisplay){
+  // elementToBeDisplayed.classList.remove('hidden');
+  elementsToDisplay.forEach(element => {
+    element.classList.remove('hidden');
+  })
 }
 
-function hideElement(elementToBeHidden){
-  elementToBeHidden.classList.add('hidden');
+function hideElement(...elementsToHide){
+  // elementToBeHidden.classList.add('hidden');
+  elementsToHide.forEach(element => {
+    element.classList.add('hidden');
+  })
 }
 
 function addBookToUI(title, author, comments){
@@ -155,4 +166,8 @@ function addBookToUI(title, author, comments){
   bookshelfContainer.appendChild(bookIllustrationEl);
 
   bookCardEl.addEventListener("click", deleteOrUpdateBook);
+}
+
+function getDeleteConfirmation(){
+  showElement(deleteConfirmationModalEl);
 }

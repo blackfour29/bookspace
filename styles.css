@@ -162,6 +162,7 @@ body{
   pointer-events: none;
   transition: 0.4s;
 }
+
 .nav__link:hover .nav__link-text{
   color: #11101d;
 }
@@ -182,16 +183,23 @@ body{
 
 .book-list-container{
   width: 100%;
+
 }
 
 .book-card-list{
   display: flex;
   flex-direction: column;
   gap: 15px;
+  height: 70vh;
+  overflow-y: auto;
 }
 
 .book-card{
-  min-width: 50px;
+  max-width: 200px;
+  flex: none; /* this line solves the height problem of the cards. They will now take whatever amount of space height they need (WITHOUT overflowing) but without exceeding 150px*/ 
+  min-height: auto;
+  max-height: 150px;
+  overflow-y: auto;
   position: relative;
   word-wrap: break-word;
   color: #fff;
@@ -207,13 +215,14 @@ body{
 .book-card__title{
   font-size: 1.6rem;
   font-weight: 600;
+  overflow-wrap: break-word;
 }
 
 .book-card__buttons{
   display: flex;
   justify-content: center;
   gap: 3rem;
-  margin: 1.5rem 0 0.5rem 0;
+  margin: 1rem 0 0.5rem 0;
 }
 
 .book-card__icon{
@@ -240,11 +249,12 @@ body{
 
 .book-card__author{
   font-size: 1.2rem;
-  text-align: end;
+  text-align: start;
+  overflow-wrap: break-word;
 }
 
 .book-card__comments{
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   font-size: 1.2rem;
 }
 
@@ -333,11 +343,13 @@ body{
   text-align: center;
   margin-bottom: 3rem;
   /* margin-left: 0.5rem; */
+  word-wrap: break-all;
   margin: 2rem 0 3rem 0.5rem;
   font-size: 2rem;
   width: 85%;
   position: relative;
   z-index: 3;
+  overflow-wrap: break-word;
 }
 
 .book__title:before{
@@ -364,6 +376,7 @@ body{
   font-size: 1.8rem;
   width: 90%;
   text-align: center;
+  overflow-wrap: break-word;
 }
 
 /* Custom scrollbar in case of the book text overflowing. Only displayed on chrome though, as it's not part of W3 specification and other browsers don't support it */
@@ -400,7 +413,7 @@ body{
   background-color: rgba(0, 0, 0, 0.6);
 }
 
-/* MODAL */
+/* MODALS */
 
 .new-book__modal,
 .update-book__modal{
@@ -418,7 +431,9 @@ body{
 }
 
 .new-book-modal__close-button,
-.update-book-modal__close-button{
+.update-book-modal__close-button,
+.delete-confirmation-modal__close-button,
+.delete-all-modal__close-button{
   width: 50px;
   height: 50px;
   font-size: 2rem;
@@ -430,6 +445,128 @@ body{
   top: 10px;
   right: 10px;
 }
+
+.delete-confirmation-modal,
+.delete-all-modal{
+  width: 400px;
+  /* height: 200px; */
+  background-color: #fff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  box-sizing: border-box;
+  padding: 2rem;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  border-radius: 1rem;
+  -webkit-box-shadow: inset 0px 0px 22px -9px rgba(0,0,0,0.59); 
+  box-shadow: inset 0px 0px 22px -9px rgba(0,0,0,0.59);
+}
+
+.delete-all-modal__title{
+  line-height: 1.5;
+}
+
+.delete-confirmation-modal{
+  height: 180px;
+}
+
+.delete-all-modal{
+  height: 250px;
+}
+
+.delete-all-modal__checkbox{
+  /* found this solution to align the checkbox and modal */
+  /* source: https://stackoverflow.com/questions/306252/how-to-align-checkboxes-and-their-labels-consistently-cross-browsers */
+  vertical-align: -2px;
+  margin: 0;
+  padding: 0;
+  width: 15px;
+  height: 15px;
+}
+
+.delete-all-modal__checkbox:focus{
+  /* found this solution to get rid of the black outline*/
+  /* Source: https://stackoverflow.com/questions/3544690/how-do-i-remove-checkbox-border/16701864#16701864 */
+  border: solid 1px transparent;
+  box-shadow: none;
+}
+
+.delete-all-modal__confirmation{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.delete-all-modal__label{
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.delete-button__container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.delete-all-modal__delete-button{
+  font-size: 1.6rem;
+  background-color: #F33139;
+  border: none;
+  padding: 0.5rem 2rem;
+  border-radius: 5px;
+  margin-top: 2rem;
+  color: #fff;
+  width: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.4;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.delete-button__allowed{
+  opacity: 1;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.delete-confirmation-modal__title,
+.delete-all-modal__title{
+  font-size: 2rem;
+  margin: 4rem 0 1.5rem 0;
+}
+
+.delete-confirmation-modal__buttons{
+  display: flex; 
+  gap: 10rem;
+  justify-content: center;
+}
+
+.delete-confirmation-modal__exit-button,
+.delete-confirmation-modal__confirm-button{
+  font-size: 1.6rem;
+  border: none;
+  color: #fff;
+  background-color: #000;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  opacity: 0.7;
+  font-weight: 600;
+}
+
+.delete-confirmation-modal__exit-button:hover,
+.delete-confirmation-modal__confirm-button:hover{
+  opacity: 1;
+}
+
+.delete-confirmation-modal__confirm-button{
+  background-color: #f33139;
+}
+
+
 
 /* ADD BOOK FORM */
 
@@ -524,6 +661,7 @@ input:focus{
   opacity: 0.8;
 }
 
+
 .alert{
   position: fixed;
   top: 30px;
@@ -549,6 +687,12 @@ input:focus{
 
 .alert__update{
   background-color: rgb(176, 176, 54);
+  color: #fff;
+  font-size: 1.6rem;
+}
+
+.alert__error{
+  background-color: rgb(230, 45, 45);
   color: #fff;
   font-size: 1.6rem;
 }
