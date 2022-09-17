@@ -76,26 +76,52 @@ function toggleBookCardVisibility(){
 } 
 
 function showAlert(type, message){
-  if(type === 'success'){
-    alertEl.style.right='50px';
-    alertEl.style.opacity = 1;
-    alertEl.textContent = `${message}`;
-    alertEl.classList.add(`alert__${type}`)
-  }
-  else if(type === 'update'){
-    alertEl.style.right = '50px'
-    alertEl.style.opacity = 1;
-    alertEl.classList.add(`alert__${type}`)
-    alertEl.textContent = `${message}`;
-  }
-  else if(type ==='error'){
-    alertEl.style.right = '50px'
-    alertEl.style.opacity = 1;
-    alertEl.classList.add(`alert__${type}`)
-    alertEl.textContent = `${message}`;
-  }
+  // if(type === 'success'){
+  //   alertEl.style.right='50px';
+  //   alertEl.style.opacity = 1;
+  //   alertEl.textContent = `${message}`;
+  //   alertEl.classList.add(`alert__${type}`)
+  // }
+  // else if(type === 'update'){
+  //   alertEl.style.right = '50px'
+  //   alertEl.style.opacity = 1;
+  //   alertEl.classList.add(`alert__${type}`)
+  //   alertEl.textContent = `${message}`;
+  // }
+  // else if(type ==='error'){
+  //   alertEl.style.right = '50px'
+  //   alertEl.style.opacity = 1;
+  //   alertEl.classList.add(`alert__${type}`)
+  //   alertEl.textContent = `${message}`;
+  // }
   
-  removeAlert();
+  // removeAlert();
+  const alertContainer = document.querySelector('.alert-container');
+
+  let alert = document.createElement('div');
+  alert.classList.add('alert');
+  alert.classList.add(`alert__${type}`);
+  alert.textContent = `${message}`;
+  // alert.style.right = '-250px'; //50px
+  // alert.style.transform = 'translateX(150px)';
+  alert.style.opacity = 0;
+
+  alertContainer.appendChild(alert);
+
+  setTimeout( () => {
+    alert.style.transform = 'translateX(-330px)';
+    alert.style.opacity = 1;
+  })
+
+  setTimeout( () => {
+    alert.style.transform = 'translateX(450px)';
+    alert.style.opacity = 0;
+  }, 2500);
+
+  setTimeout( () => {
+    alert.remove();
+  }, 3000);
+
 }
 
 function removeAlert(){

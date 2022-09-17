@@ -123,7 +123,7 @@ deleteAllModalCloseBtn.addEventListener('click', () => {
 });
 
 deleteAllBooksLinkEl.addEventListener('click', () => {
-  hideElement(newBookModalEl, updateBookModalEl, deleteConfirmationModalEl);
+  hideElement(newBookModalEl, updateBookModalEl, deleteConfirmationModalEl, overlayEl);
   
   if(bookIllustrationsLive.length === 0){
     showAlert('error', 'Nothing to delete!');
