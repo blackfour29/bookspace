@@ -7,6 +7,7 @@ function toggleSidebarElements(){
   toggleMainContainerWidth();
   toggleHorizontalRule();
   toggleBookCardVisibility();
+  toggleBookCardListScrollbar();
 }
 
 
@@ -38,7 +39,7 @@ function toggleMenuBtn() {
     menuBtn.classList.replace('fa-xmark','fa-bars');
   }
 }
- 
+
 function toggleNavLinkTextEls(){
   navLinkTextEls.forEach(el => {
     if(el.style.opacity == 0){
@@ -75,87 +76,75 @@ function toggleBookCardVisibility(){
   }
 } 
 
-function showAlert(type, message){
-  // if(type === 'success'){
-  //   alertEl.style.right='50px';
-  //   alertEl.style.opacity = 1;
-  //   alertEl.textContent = `${message}`;
-  //   alertEl.classList.add(`alert__${type}`)
-  // }
-  // else if(type === 'update'){
-  //   alertEl.style.right = '50px'
-  //   alertEl.style.opacity = 1;
-  //   alertEl.classList.add(`alert__${type}`)
-  //   alertEl.textContent = `${message}`;
-  // }
-  // else if(type ==='error'){
-  //   alertEl.style.right = '50px'
-  //   alertEl.style.opacity = 1;
-  //   alertEl.classList.add(`alert__${type}`)
-  //   alertEl.textContent = `${message}`;
-  // }
-  
-  // removeAlert();
-  const alertContainer = document.querySelector('.alert-container');
+function toggleBookCardListScrollbar(){
+  // if there are more than a few book cards in the list, they will have a scrollbar even if the sidebar is hidden. This function fixes that
+  // need a short delay so the scrollbar doesn't appear instantly
+    if(bookCardListEl.style.overflowY === 'auto'){
+      setTimeout( () => {
+        bookCardListEl.style.overflowY = 'hidden';
+      }, 10); // basically instant
+    }
+    else if(bookCardListEl.style.overflowY === 'hidden'){
+      setTimeout( () => {
+        bookCardListEl.style.overflowY = 'auto';
+      }, 300);
+    }
+}
 
+function showAlert(type, message){
+  // create the alert element
   let alert = document.createElement('div');
   alert.classList.add('alert');
   alert.classList.add(`alert__${type}`);
   alert.textContent = `${message}`;
-  // alert.style.right = '-250px'; //50px
-  // alert.style.transform = 'translateX(150px)';
   alert.style.opacity = 0;
 
+  // add it to the DOM
   alertContainer.appendChild(alert);
 
+  // alert entering
   setTimeout( () => {
     alert.style.transform = 'translateX(-330px)';
     alert.style.opacity = 1;
   })
 
+  // alert leaving
   setTimeout( () => {
     alert.style.transform = 'translateX(450px)';
     alert.style.opacity = 0;
   }, 2500);
 
+  // alert removing
   setTimeout( () => {
     alert.remove();
   }, 3000);
 
 }
 
-function removeAlert(){
-  setTimeout( () => {
-    alertEl.style.right = '-250px';
-    alertEl.style.opacity = 0;
-  }, 3000);
-}
-
 function clearFormFields(){
   formTitleInput.value = '';
   formAuthorInput.value = '';
-  formCommentsInput.value ='';
+  formCommentsInput.value = '';
 }
 
 function showElement(...elementsToDisplay){
-  // elementToBeDisplayed.classList.remove('hidden');
   elementsToDisplay.forEach(element => {
     element.classList.remove('hidden');
   })
 }
 
 function hideElement(...elementsToHide){
-  // elementToBeHidden.classList.add('hidden');
   elementsToHide.forEach(element => {
     element.classList.add('hidden');
   })
 }
 
-function addBookToUI(title, author, comments){
-  let bookIllustrationEl = document.createElement('div');
+function addBookToUI(title, author, comments, bookId){
   hideElement(overlayEl);
   hideElement(newBookModalEl);
   
+  // create the elements
+  let bookIllustrationEl = document.createElement('div');
   bookIllustrationEl.classList.add('book');
   
   bookIllustrationEl.innerHTML = `
@@ -167,33 +156,37 @@ function addBookToUI(title, author, comments){
   
   let bookCardEl = document.createElement('div');
   bookCardEl.classList.add('book-card');
-
+  
+  bookCardEl.innerHTML = `
+  <p class="book-card__title">${title}</p>
+  <p class="book-card__author"><span>${author.length > 0 ? "by" : ""}</span> ${author}</p>
+  <p class="book-card__comments">${comments}</p>
+  <div class="book-card__buttons">
+  <i class="fa-solid fa-pen book-card__icon book-card__edit-icon"></i>
+  <i class="fa-solid fa-xmark book-card__icon "></i>
+  </div>
+  `
+  
+  bookIllustrationEl.setAttribute('id', bookId);
+  bookCardEl.setAttribute('id', bookId);
+  
+  // append the create elements
+  bookCardsContainer.appendChild(bookCardEl);
+  bookshelfContainer.appendChild(bookIllustrationEl);
+  
+  // open sidebar to show that the book-card was added
   if(!sidebar.classList.contains("sidebar--open")){
     bookCardEl.classList.add('invisible');
   }
 
-
-  bookCardEl.innerHTML = `
-    <p class="book-card__title">${title}</p>
-    <p class="book-card__author"><span>${author.length > 0 ? "by" : ""}</span> ${author}</p>
-    <p class="book-card__comments">${comments}</p>
-    <div class="book-card__buttons">
-      <i class="fa-solid fa-pen book-card__icon book-card__edit-icon"></i>
-      <i class="fa-solid fa-xmark book-card__icon "></i>
-    </div>
-  `
-
-  let bookId = generateUniqueId();
-
-  bookIllustrationEl.setAttribute('id', bookId);
-  bookCardEl.setAttribute('id', bookId);
-
-  bookCardsContainer.appendChild(bookCardEl);
-  bookshelfContainer.appendChild(bookIllustrationEl);
-
+  // add event listener on the book card so it can be edited or deleted
   bookCardEl.addEventListener("click", deleteOrUpdateBook);
 }
 
-function getDeleteConfirmation(){
-  showElement(deleteConfirmationModalEl);
+function renderStoredData(storedData){
+  storedData.forEach( bookEntry => {
+    console.log(bookEntry);
+    bookLibrary.push(bookEntry);
+     addBookToUI(bookEntry.bookData[0], bookEntry.bookData[1], bookEntry.bookData[2], bookEntry.elementId);
+  })
 }

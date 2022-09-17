@@ -5,13 +5,21 @@
 
 :root{
   font-size: 62.5%;
-  --serif-font: 'Domine', serif;
-  --book-serif-font: 'Merriweather', serif;
+  --serif-font: 'Merriweather', serif;
+  --sans-serif-font: "Poppins" , sans-serif;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--sans-serif-font) ;
 }
 
 body{
   background-color: rgb(239, 237, 222);
   min-height: 100vh;
+  font-family: var(--book-serif-font);
 }
 
 .layout{
@@ -24,17 +32,9 @@ body{
   text-align: center;
   margin: 3rem 0 5rem 0;
   font-size: 3rem;
-  /* font-family: var(--serif-font); */
-  font-family: var(--book-serif-font);
+  font-family: var(--serif-font);
   font-size: 4rem;
   font-weight: 600;
-}
-
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins" , sans-serif;
 }
 
 
@@ -181,9 +181,12 @@ body{
   margin-bottom: 3rem;
 }
 
+.book-card-container{
+  height: 70vh;
+}
+
 .book-list-container{
   width: 100%;
-
 }
 
 .book-card-list{
@@ -192,6 +195,8 @@ body{
   gap: 15px;
   height: 70vh;
   overflow-y: auto;
+  box-sizing: border-box;
+  padding-bottom: 4rem;
 }
 
 .book-card{
@@ -209,7 +214,7 @@ body{
   padding: 0.4rem;
   transition: width 0.1s ease;
   transition: opacity 0.5s ease 0.3s;
-  /* the item should vanish instantly and appear only after the sidebar is fully extended */
+  /* this item should appear only after the sidebar is fully extended (and also vanish instantly) */
 }
 
 .book-card__title{
@@ -294,10 +299,10 @@ body{
 
   border-radius: 20px 16px 12px 32px;
   background-image: linear-gradient(to right,#D11F2F 48px, #ba0716 50px, transparent 50px);  
-  -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.44),
-                      6px 0px 7px -4px rgba(0,0,0,0.59); 
   box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.44),
               6px 0px 7px -4px rgba(0,0,0,0.29);
+  -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.44),
+                      6px 0px 7px -4px rgba(0,0,0,0.59); 
 
   position: relative;
   box-sizing: border-box;
@@ -308,7 +313,7 @@ body{
   
 }
 
-.book:after{
+.book:after{  /*bottom pages design*/
   content: '';
   position: absolute;
   left: 3px;
@@ -342,7 +347,6 @@ body{
 .book__title{
   text-align: center;
   margin-bottom: 3rem;
-  /* margin-left: 0.5rem; */
   word-wrap: break-all;
   margin: 2rem 0 3rem 0.5rem;
   font-size: 2rem;
@@ -352,7 +356,7 @@ body{
   overflow-wrap: break-word;
 }
 
-.book__title:before{
+.book__title:before{ /* the below 'overlay'*/
   content: "";
   position: absolute;
   left: -0.25rem;
@@ -379,7 +383,7 @@ body{
   overflow-wrap: break-word;
 }
 
-/* Custom scrollbar in case of the book text overflowing. Only displayed on chrome though, as it's not part of W3 specification and other browsers don't support it */
+/* Custom scrollbar. Only displayed on chrome though, as it's not part of W3 specification and other browsers don't support it */
 
 ::-webkit-scrollbar {
   width: 12px;
@@ -394,7 +398,6 @@ body{
 }
 
 ::-webkit-scrollbar-thumb {
-
   -webkit-border-radius: 10px;
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
@@ -583,7 +586,6 @@ body{
   font-size: 2rem;
   margin: 0 0 1rem 0;
   font-weight: 500;
-  /* color: green; */
   color: rgb(22, 145, 221);
 }
 
@@ -619,7 +621,6 @@ input:focus{
 
 .new-book__comments,
 .update-book__comments{
-  /* width: 280px; */
   box-sizing: border-box;
   padding: 0.5rem;
   resize: vertical;
@@ -663,28 +664,22 @@ input:focus{
 }
 
 
+/* Alerts */
+
 .alert-container{
   position: fixed;
   top: 30px;
   right: -300px;
   width: 600px;
-  /* right: 0px; */
   z-index: 100;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-start;
   gap: 1rem;
-
 }
 
 .alert{
-  
-  /* position: fixed;
-  top: 30px;
-  right: -250px; */
-   /*should be 50px*/
-  
   width: 250px;
   height: 60px;
   box-sizing: border-box;
@@ -718,12 +713,7 @@ input:focus{
 }
 
 
-
-
-
-
-
-
+/* special classes */
 
 .invisible{
   opacity: 0;
@@ -735,11 +725,3 @@ input:focus{
 
 
 
-
-
-
-@media (max-width: 420px) {
-  .sidebar li .nav__tooltip{
-    display: none;
-  }
-}
